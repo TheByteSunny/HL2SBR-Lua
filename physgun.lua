@@ -1,9 +1,10 @@
 --- Copyright © 2026, YourLocalCappy, all rights deserved ---
 
--- please work now damn damn DAMN IT
+--[[
 local offsetX = ConVar("physgun_glow_offset_x", "-1.5", FCVAR.REPLICATED)
 local offsetY = ConVar("physgun_glow_offset_y", "0.0", FCVAR.REPLICATED)
 local offsetZ = ConVar("physgun_glow_offset_z", "0.0", FCVAR.REPLICATED)
+]]
 
 function Physgun(mode, fx, r, g, b, scale, pPlayer)
 
@@ -28,6 +29,7 @@ function Physgun(mode, fx, r, g, b, scale, pPlayer)
         return
     end
 
+    --[[
     local pos = Vector()
     local ang = QAngle()
 
@@ -38,6 +40,7 @@ function Physgun(mode, fx, r, g, b, scale, pPlayer)
     pos.x = pos.x + offsetX:GetFloat()
     pos.y = pos.y + offsetY:GetFloat()
     pos.z = pos.z + offsetZ:GetFloat()
+    ]]
 
     local sprite = ents.Create("env_sprite")
 
@@ -45,7 +48,7 @@ function Physgun(mode, fx, r, g, b, scale, pPlayer)
         return
     end
 
-    sprite:SetAbsOrigin(pos)
+    -- sprite:SetAbsOrigin(pos)
 
     sprite:KeyValue("model", "sprites/glow01.vmt")
     sprite:KeyValue("rendermode", tostring(mode))
@@ -59,6 +62,8 @@ function Physgun(mode, fx, r, g, b, scale, pPlayer)
 
     sprite:Spawn()
     sprite:Activate()
+
+    sprite:SetParent(vm, att)
 
     timer.Simple(0.02, function()
 
